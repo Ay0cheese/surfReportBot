@@ -1,59 +1,65 @@
-const puppeteer = require('puppeteer-extra')
-const StealthPlugin = require('puppeteer-extra-plugin-stealth')
-puppeteer.use(StealthPlugin())
-
 
 // That's it, the rest is puppeteer usage as normal 😊
 // This section is gathering the data for surfline:
-// (async() => {
-//   const browser = await puppeteer.launch ({ headless: true })
-//   const page = await browser.newPage()
-//   await page.setViewport({ width: 800, height: 600 })
-//   await page.goto('https://www.surfline.com/surf-report/the-wedge/5842041f4e65fad6a770882b')
-//   const surfReport = await page.evaluate(() => {
-//     const dateElement = document.querySelectorAll(".sl-chart-mobile-day__day")
-//     const fiveDayForcast = [document.querySelectorAll(".sl-chart-mobile-day__surf-height").innerText]
-//     dateElement.forEach((word) =>{
-//       fiveDayForcast.push(word.innerText)
-//           return fiveDayForcast;
-
-  
-//     })
-//     console.log(surfReport)
-//   //   return fiveDayForcast;
-
-//   //  console.log(surfReport)
-//   })
-// })()
-
-// This is the google voice section:
-puppeteer.launch({ headless: false }).then(async browser => {
-  console.log('Running tests..')
-    const page = await browser.newPage()
-    await page.setViewport({ width: 800, height: 600 })
-    await page.goto('https://accounts.google.com/signin/v2/identifier')
-    await page.type('[type="email"]', "wadegoodman95@gmail.com")
-    
-    await page.click('#identifierNext')
-    await page.waitForTimeout(1500)
-    await page.type('[type="password"]', "Cheeseandbananas")
-    await page.waitForTimeout(1500)
-    await page.waitForSelector('.whsOnd.zHQkBf')
-    await page.click('.VfPpkd-vQzf8d')
-    await page.waitForSelector('.whsOnd.zHQkBf')
-    await page.click('.VfPpkd-vQzf8d')
-    await page.goto('https://voice.google.com/u/0/messages')
-    await page.waitForSelector('.signUpLink')
-    await page.click('.signUpLink')
-    await page.goto('https://voice.google.com/u/0/messages')
-    await page.click('[id="apiproxy794f59e83560ea5d6299b7ff3b7a1d7788beabed0.1220890444"]');
-    
-    
-    
-    // await browser.close()
+const puppeteer = require('puppeteer');
 
 
+
+(async() => {
+  const browser = await puppeteer.launch ({ headless: false })
+  const page = await browser.newPage()
+  await page.setViewport({ width: 800, height: 600 })
+  await page.goto('https://www.surfline.com/surf-report/the-wedge/5842041f4e65fad6a770882b')
+  await page.waitForSelector('.sl-chart-mobile-day__day')
+  await page.waitForSelector('.sl-chart-mobile-day__surf-height')
+  await page.waitForTimeout(1500)
+  const forcasts = await page.evaluate(() => {
+    const date = document.querySelectorAll('.sl-chart-mobile-day__day')
+    const waves = [document.querySelectorAll('.sl-chart-mobile-day__surf-height').innerText]
+    date.forEach(word => {
+      waves.push(word.innerText)
+    });
+    return date;
   })
+  console.log(forcasts)
+})();
+// This is the google voice section:
+
+// const puppeteer = require('puppeteer-extra')
+// const StealthPlugin = require('puppeteer-extra-plugin-stealth')
+// puppeteer.use(StealthPlugin())
+// puppeteer.launch({ headless: false }).then(async browser => {
+//   console.log('Running tests..')
+//     const page = await browser.newPage()
+//     await page.setViewport({ width: 800, height: 600 })
+//     await page.goto('https://accounts.google.com/signin/v2/identifier')
+//     await page.type('[type="email"]', "wadegoodman95@gmail.com")
+    
+//     await page.click('#identifierNext')
+//     await page.waitForTimeout(1500)
+//     await page.type('[type="password"]', "Cheeseandbananas")
+//     await page.waitForTimeout(1500)
+//     await page.waitForSelector('.whsOnd.zHQkBf')
+//     await page.click('.VfPpkd-vQzf8d')
+//    await page.goto('https://voice.google.com/u/0/calls')
+//    await page.waitForTimeout(1500)
+//    await page.click('.signUpLink')
+//    await page.waitForTimeout(2500)
+//    await page.goto('https://voice.google.com/u/0/messages?itemId=draft-4C1D85F0-7B95-4B06-82B2-4527E589A1F3')
+//    await page.waitForTimeout(1500)
+//    await page.click('.mat-chip-list')
+// // Keeps crashing here. Im trying to click on the "To" so I can input a number. puppeteer is not able to find the class name.
+   
+
+   
+   
+    
+    
+    
+//     // await browser.close()
+
+
+  // })
   
 
 
