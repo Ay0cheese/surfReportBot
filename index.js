@@ -1,35 +1,34 @@
-// const { launch } = require('puppeteer')
-
-// const { FrameManagerEmittedEvents } = require('puppeteer')
-const puppeteer = require('puppeteer')
-// const StealthPlugin = require('puppeteer-extra-plugin-stealth')
-// puppeteer.use(StealthPlugin())
-
+const puppeteer = require('puppeteer-extra')
+const StealthPlugin = require('puppeteer-extra-plugin-stealth')
+puppeteer.use(StealthPlugin())
 
 
 // That's it, the rest is puppeteer usage as normal 😊
 // This section is gathering the data for surfline:
-(async() => {
-  const browser = await puppeteer.launch ({ headless: false })
-  const page = await browser.newPage()
-  await page.setViewport({ width: 800, height: 600 })
-  await page.goto('https://www.surfline.com/surf-report/the-wedge/5842041f4e65fad6a770882b')
-  const surfReport = await page.evaluate(() => {
-    const dateElement = document.querySelectorAll(".sl-chart-mobile-day__day")
-    const fiveDayForcast = [document.querySelectorAll(".sl-chart-mobile-day__surf-height").innerText]
-    dateElement.forEach((word) =>{
-      fiveDayForcast.push(word.innerText)
-    })
+// (async() => {
+//   const browser = await puppeteer.launch ({ headless: true })
+//   const page = await browser.newPage()
+//   await page.setViewport({ width: 800, height: 600 })
+//   await page.goto('https://www.surfline.com/surf-report/the-wedge/5842041f4e65fad6a770882b')
+//   const surfReport = await page.evaluate(() => {
+//     const dateElement = document.querySelectorAll(".sl-chart-mobile-day__day")
+//     const fiveDayForcast = [document.querySelectorAll(".sl-chart-mobile-day__surf-height").innerText]
+//     dateElement.forEach((word) =>{
+//       fiveDayForcast.push(word.innerText)
+//           return fiveDayForcast;
 
-    return fiveDayForcast;
+  
+//     })
+//     console.log(surfReport)
+//   //   return fiveDayForcast;
 
-   console.log(surfReport)
-  })
-})()
+//   //  console.log(surfReport)
+//   })
+// })()
 
 // This is the google voice section:
-
 puppeteer.launch({ headless: false }).then(async browser => {
+  console.log('Running tests..')
     const page = await browser.newPage()
     await page.setViewport({ width: 800, height: 600 })
     await page.goto('https://accounts.google.com/signin/v2/identifier')
@@ -51,7 +50,7 @@ puppeteer.launch({ headless: false }).then(async browser => {
     
     
     
-    await browser.close()
+    // await browser.close()
 
 
   })
