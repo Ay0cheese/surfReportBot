@@ -47,8 +47,8 @@ const puppeteer = require('puppeteer');
 //    await page.waitForTimeout(2500)
 //    await page.goto('https://voice.google.com/u/0/messages?itemId=draft-4C1D85F0-7B95-4B06-82B2-4527E589A1F3')
 //    await page.waitForTimeout(1500)
-//    await page.click('.mat-chip-list')
-// // Keeps crashing here. Im trying to click on the "To" so I can input a number. puppeteer is not able to find the class name.
+//    await page.click('.dOUild-Od0oM.grey-700')
+// Keeps crashing here. Im trying to click on the "To" so I can input a number. puppeteer is not able to find the class name.
    
 
    
@@ -56,7 +56,7 @@ const puppeteer = require('puppeteer');
     
     
     
-//     // await browser.close()
+    // await browser.close()
 
 
   // })
