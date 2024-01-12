@@ -33,11 +33,11 @@ const puppeteer = require('puppeteer');
 //     const page = await browser.newPage()
 //     await page.setViewport({ width: 800, height: 600 })
 //     await page.goto('https://accounts.google.com/signin/v2/identifier')
-//     await page.type('[type="email"]', "wadegoodman95@gmail.com")
+//     await page.type('[type="email"]', "Email")
     
 //     await page.click('#identifierNext')
 //     await page.waitForTimeout(1500)
-//     await page.type('[type="password"]', "Cheeseandbananas")
+//     await page.type('[type="password"]', "Password")
 //     await page.waitForTimeout(1500)
 //     await page.waitForSelector('.whsOnd.zHQkBf')
 //     await page.click('.VfPpkd-vQzf8d')
